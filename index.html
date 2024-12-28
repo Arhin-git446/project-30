@@ -1,0 +1,103 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Login Form Validation</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f4f4f4;  
+            padding: 20px;  
+        }  
+        .container {  
+            max-width: 400px;  
+            margin: auto;  
+            background: white;  
+            padding: 20px;  
+            border-radius: 5px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+        }  
+        h2 {  
+            text-align: center;  
+        }  
+        input[type="text"], input[type="number"] {  
+            width: 100%;  
+            padding: 10px;  
+            margin: 10px 0;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+        }  
+        button {  
+            width: 100%;  
+            padding: 10px;  
+            background-color: #28a745;  
+            color: white;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+        }  
+        button:hover {  
+            background-color: #218838;  
+        }  
+        .error {  
+            color: red;  
+            font-size: 0.9em;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+<div class="container">  
+    <h2>Login Form</h2>  
+    <form id="loginForm">  
+        <label for="name">Name:</label>  
+        <input type="text" id="name" name="name" required placeholder="Enter your name">  
+        <span class="error" id="nameError"></span>  
+        
+        <label for="age">Age:</label>  
+        <input type="number" id="age" name="age" required placeholder="Enter your age">  
+        <span class="error" id="ageError"></span>  
+        
+        <button type="submit">Submit</button>  
+    </form>  
+</div>  
+
+<script>  
+    document.getElementById('loginForm').addEventListener('submit', function(event) {  
+        event.preventDefault();  
+
+        // Reset error messages  
+        document.getElementById('nameError').textContent = '';  
+        document.getElementById('ageError').textContent = '';  
+
+        // Get input values  
+        const name = document.getElementById('name').value.trim();  
+        const age = parseInt(document.getElementById('age').value.trim(), 10);  
+        let valid = true;  
+
+        // Validate name  
+        if (name === '') {  
+            document.getElementById('nameError').textContent = 'Name is required.';  
+            valid = false;  
+        }  
+
+        // Validate age  
+        if (isNaN(age) || age < 18) {  
+            document.getElementById('ageError').textContent = 'You must be 18 years or older.';  
+            valid = false;  
+        }  
+
+        // If valid, submit or do something  
+        if (valid) {  
+            alert("Form submitted successfully!");  
+
+            // Clear input fields after successful validation  
+            document.getElementById('name').value = '';  
+            document.getElementById('age').value = '';  
+        }  
+    });  
+</script>  
+
+</body>  
+</html>
